@@ -8,11 +8,17 @@ const config = {
         filename: 'bundle.js'
     },
     module: {
-        rules: [
+       rules: [{
+           loader: 'babel-loader',
+    query: {
+    presets: [
+        'es2015',
+        'react'
+    ]}},
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: 'babel-loader'
+                use: ['babel-loader', 'style-loader', 'css-loader']
             }
         ]
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/ChatApp.css';
+import '../styles/App.css';
 
 class Clear extends Component {
     render() {

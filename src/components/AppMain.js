@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 import Messages from './Messages';
 import ChatInput from './ChatInput';
+import Clear from './Clear';
 
 import AWS from 'aws-sdk';
 AWS.config.region = 'us-east-1'; // Region

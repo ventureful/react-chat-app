@@ -11,7 +11,7 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
 });
 
 const lexruntime = new AWS.LexRuntime();
-const lexUserId = 'chatbot_demo' + Date.now();
+const lexUserId = 'chatbot-demo' + Date.now();
 let bot = 'BookTrip';
 
 const lexRequest = ( messageObject, errorHandler, addMessageHandler)=> {
@@ -26,8 +26,8 @@ const lexRequest = ( messageObject, errorHandler, addMessageHandler)=> {
         if (err) {
             console.log(err, err.stack);
             errorHandler(err);
-        } else {
-            addMessageHandler(object.assign({},data, {username: 'Chat Bot'}));
+        } else if (data) {
+            addMessageHandler({...data, username: 'Chat Bot'});
         }
     })
 };
@@ -39,8 +39,6 @@ class AppMain extends Component {
             messages: []
         };
         this.sendHandler = this.sendHandler.bind(this);
-        this.sendHelloButtonMessage = this.sendHelloButtonMessage.bind(this);
-        this.sendBookingButtonMessage = this.sendBookingButtonMessage.bind(this);
         this.clearMessages = this.clearMessages.bind(this);
         this.addMessage = this.addMessage.bind(this);
         this.addErrorMessage = this.addErrorMessage.bind(this);
@@ -57,7 +55,7 @@ class AppMain extends Component {
         this.addMessage(messageObject);
 
         // sets parameters for the postText request to AWS lex
-        lexRequest( messageObject, this.addErrorMessage, this.addMessage, this.state);
+         lexRequest( messageObject, this.addErrorMessage, this.addMessage, this.state);
     }
 
     addMessage(message) {
